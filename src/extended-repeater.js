@@ -15,6 +15,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
+
  function repeater(str, {repeatTimes, separator, addition, additionRepeatTimes, additionSeparator }) {
   if(!(typeof str) === 'string') {
     str = str.toString();
@@ -24,29 +25,28 @@ const { NotImplementedError } = require('../extensions/index.js');
   }
   else if (typeof str === 'object') {
     str = `${str}`
-    console.log(str)
   }
-if (!typeof(repeatTimes) === Number || !typeof(additionRepeatTimes) === Number) {
-  repeatTimes = 1;
-  additionRepeatTimes =1;
-}
+  if(separator === undefined) {separator = '+';}
+  if(additionSeparator === undefined) {additionSeparator = '|';}
+  if(repeatTimes === undefined) {repeatTimes = 1;}
+  if(additionRepeatTimes === undefined) {additionRepeatTimes = 1};
+
   let result ='';
 for(let i=0; i< repeatTimes; i++ ) {
-  if (!separator) {
+  if (separator === undefined) {
     separator ='+';
   }
   result +=str; 
-   if (addition){
+   if (addition !== undefined){
     if (typeof addition === 'object') {
       addition = `${addition}`;
-      console.log(addition)
     }
-    else {
-      addition = addition.toString();
+    else if(addition) {
+      addition = addition.toString()
     }
 
      for (let n=0; n< additionRepeatTimes; n++ ) {
-    if (!additionSeparator) {
+    if (additionSeparator === undefined) {
       additionSeparator ='|';
     }
     result +=addition;
